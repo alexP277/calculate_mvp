@@ -2,14 +2,17 @@ import React from 'react';
 import './App.css';
 import Routing from "./pages";
 import AppHeader from "./components/AppHeader";
+import {StateProvider} from "./shared/store";
 
 function App() {
 
     return (
-        <div>
-               <AppHeader/>
+        <StateProvider>
+            <div>
+                <AppHeader/>
                 <Routing/>
-        </div>
+            </div>
+        </StateProvider>
     );
 }
 

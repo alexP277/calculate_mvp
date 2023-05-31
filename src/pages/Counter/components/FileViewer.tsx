@@ -1,15 +1,19 @@
 import {UploadOutlined} from "@ant-design/icons";
 import {Button, Card, Upload as UploadFile} from "antd";
-import {useState} from "react";
+import {FC, useState} from "react";
 import './style.css';
+import useLocalStorage from "../../../shared/useLocalStorage";
 
-const FileViewer: React.FC = () => {
+const FileViewer: FC = () => {
     const [file, setFile] = useState<string | null>(null);
+    const [_data, setData] = useLocalStorage('fileName', '' );
 
     const handleFileChange = (info: any) => {
         const {file} = info;
+        setData(file.name);
 
         if (file?.status === "removed") {
+            setData('')
             setFile(null);
             return;
         }

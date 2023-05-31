@@ -1,66 +1,60 @@
 import React from 'react';
 import './../../App.css';
 import {Table} from "antd";
+import {ColumnsType} from "antd/es/table";
+import {DtoType} from "../../shared/store";
+import useLocalStorage from "../../shared/useLocalStorage";
 
-const data = [
+const columns:ColumnsType<DtoType> = [
     {
-        key: '1',
-        номер: 1,
-        'вид работ': 'Установка оборудования',
-        'дата начала работ': '2023-05-01',
-        'дата окончания работ': '2023-05-10',
-        'количество людей': 5,
-        сумма: 5000,
+        title: '№ - Нумерация',
+        dataIndex: 'id',
+        key: 'id',
     },
     {
-        key: '2',
-        номер: 2,
-        'вид работ': 'Монтаж электрики',
-        'дата начала работ': '2023-06-01',
-        'дата окончания работ': '2023-06-15',
-        'количество людей': 8,
-        сумма: 8000,
-    },
-    // Добавьте другие объекты данных по необходимости
-];
-
-const columns = [
-    {
-        title: 'Номер',
-        dataIndex: 'номер',
-        key: 'номер',
+        title: 'Название чертежа(всегда одноименное с названием файла ПДФ)',
+        dataIndex: 'name',
+        key: 'name',
     },
     {
-        title: 'Вид работ',
-        dataIndex: 'вид работ',
-        key: 'вид работ',
+        title: 'Вид конструкции',
+        dataIndex: 'constructionType',
+        key: 'constructionType',
     },
     {
-        title: 'Дата начала работ',
-        dataIndex: 'дата начала работ',
-        key: 'дата начала работ',
+        title: 'Тоннаж',
+        dataIndex: 'mass',
+        key: 'mass',
     },
     {
-        title: 'Дата окончания работ',
-        dataIndex: 'дата окончания работ',
-        key: 'дата окончания работ',
+        title: 'Бригада №',
+        dataIndex: 'team',
+        key: 'team',
     },
     {
-        title: 'Количество людей',
-        dataIndex: 'количество людей',
-        key: 'количество людей',
+        title: 'Кол-во человек',
+        dataIndex: 'peopleCount',
+        key: 'peopleCount',
     },
     {
-        title: 'Сумма',
-        dataIndex: 'сумма',
-        key: 'сумма',
+        title: 'Итоговое значение',
+        dataIndex: 'totalPrice',
+        key: 'totalPrice',
+    },
+    {
+        title: 'Дата когда отдано в работу',
+        dataIndex: 'calculationDate',
+        key: 'calculationDate',
     },
 ];
 
 const History = () => {
+
+    const [tableData, _setTableData] = useLocalStorage('tableData', '');
+
     return (
         <div className="container">
-            <Table dataSource={data} columns={columns} />;
+            <Table dataSource={tableData} columns={columns} />;
         </div>
     );
 };
